@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- 引入Plotly.js庫 -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+
+<body>
+
+  <!-- 創建一個空的div元素，用於顯示長條圖 -->
+  <div id="barChart"></div>
+
+  <script>
+    // 數據
+    var data = [
+      { '區域別': '總　計', '村里數': 7748, '鄰數': 142, '人口數': 23392421 }
+    ];
+
+    // 提取數據
+    var areas = data.map(item => item['區域別']);
+    var villages = data.map(item => item['村里數']);
+    var neighborhoods = data.map(item => item['鄰數']);
+    var populations = data.map(item => item['人口數']);
+
+    // 創建長條圖數據
+    var barChartData = [
+      {
+        x: areas,
+        y: villages,
+        type: 'bar',
+        name: '村里數'
+      },
+      {
+        x: areas,
+        y: neighborhoods,
+        type: 'bar',
+        name: '鄰數'
+      },
+      {
+        x: areas,
+        y: populations,
+        type: 'bar',
+        name: '人口數'
+      }
+    ];
+
+    // 定義圖表佈局
+    var layout = {
+      title: '區域數據長條圖',
+      xaxis: {
+        title: '區域別'
+      },
+      yaxis: {
+        title: '數量'
+      },
+      barmode: 'group' // 將長條圖分組顯示
+    };
+
+    // 在指定的div元素中繪製長條圖
+    Plotly.newPlot('barChart', barChartData, layout);
+  </script>
+
+</body>
+
+</html>
