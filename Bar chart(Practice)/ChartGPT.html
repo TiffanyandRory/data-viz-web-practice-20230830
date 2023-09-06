@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- 引入Plotly.js庫 -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+
+<body>
+    <!-- 創建一個空的 div 元素，用於顯示長條圖 -->
+    <div id="combinedBarChart"></div>
+
+    <script>
+        // 數據 for TPE Zoo
+        var dataTPE = [
+            { 'Zoo': 'TPE Zoo', 'Lion': 10, 'Tiger': 20, 'Monkey': 30 }
+        ];
+
+        // 數據 for Taoyuan Zoo
+        var dataTaoyuan = [
+            { 'Zoo': 'Taoyuan Zoo', 'Lion': 5, 'Tiger': 15, 'Monkey': 25 }
+        ];
+
+        // 提取數據
+        var zoos = ['TPE Zoo', 'Taoyuan Zoo'];
+        var animals = ['Lion', 'Tiger', 'Monkey'];
+
+        // Create trace objects
+        var traces = [];
+
+        for (var i = 0; i < animals.length; i++) {
+            var trace = {
+                type: 'bar',
+                name: animals[i],
+                x: zoos,
+                y: [dataTPE[0][animals[i]], dataTaoyuan[0][animals[i]]],
+                text: [dataTPE[0][animals[i]], dataTaoyuan[0][animals[i]]],
+                textfont: {
+                    color: 'yellow',
+                    size: 20
+                },
+                marker: {
+                    color: i === 0 ? 'blue' : i === 1 ? 'purple' : 'green' // Color for each animal
+                }
+            };
+            traces.push(trace);
+        }
+
+        // Create layout
+        var layout = {
+            margin: {
+                t: 0
+            },
+            barmode: 'stack' // 將長條圖堆疊
+        };
+
+        // Plot the bar chart
+        Plotly.newPlot('combinedBarChart', traces, layout);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- 引入Plotly.js庫 -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+
+<body>
+  <!-- 創建一個空的 div 元素，用於顯示長條圖 -->
+  <div id="combinedBarChart"></div>
+
+  <script>
+    // 第一組數據
+    var data1 = [
+      { '區域別': '總　計', '村里數': 7748, '鄰數': 142, '人口數': 23392421 }
+    ];
+
+    // 提取數據
+    var areas1 = data1.map(item => item['區域別']);
+    var villages1 = data1.map(item => item['村里數']);
+    var neighborhoods1 = data1.map(item => item['鄰數']);
+    var populations1 = data1.map(item => item['人口數']);
+
+    // 第二組數據
+    var data2 = [
+      { '區域別': '總　計', '村里數': 6500, '鄰數': 120, '人口數': 20000000 }
+    ];
+
+    // 提取數據
+    var areas2 = data2.map(item => item['區域別']);
+    var villages2 = data2.map(item => item['村里數']);
+    var neighborhoods2 = data2.map(item => item['鄰數']);
+    var populations2 = data2.map(item => item['人口數']);
+
+    // 創建合併後的長條圖數據
+    var combinedBarChartData = [
+      {
+        x: areas1,
+        y: villages1,
+        type: 'bar',
+        name: '村里數 (Set 1)',
+        marker: { color: 'blue' }
+      },
+      {
+        x: areas1,
+        y: neighborhoods1,
+        type: 'bar',
+        name: '鄰數 (Set 1)',
+        marker: { color: 'green' }
+      },
+      {
+        x: areas1,
+        y: populations1,
+        type: 'bar',
+        name: '人口數 (Set 1)',
+        marker: { color: 'red' }
+      },
+      {
+        x: areas2,
+        y: villages2,
+        type: 'bar',
+        name: '村里數 (Set 2)',
+        marker: { color: 'lightblue' }
+      },
+      {
+        x: areas2,
+        y: neighborhoods2,
+        type: 'bar',
+        name: '鄰數 (Set 2)',
+        marker: { color: 'lightgreen' }
+      },
+      {
+        x: areas2,
+        y: populations2,
+        type: 'bar',
+        name: '人口數 (Set 2)',
+        marker: { color: 'lightcoral' }
+      }
+    ];
+
+    // 定義圖表佈局
+    var layout = {
+      title: '合併區域數據長條圖',
+      xaxis: {
+        title: '區域別'
+      },
+      yaxis: {
+        title: '數量'
+      },
+      barmode: 'group' // 將長條圖分組顯示
+    };
+
+    // 在指定的 div 元素中繪製合併後的長條圖
+    Plotly.newPlot('combinedBarChart', combinedBarChartData, layout);
+  </script>
+</body>
+
+</html>
